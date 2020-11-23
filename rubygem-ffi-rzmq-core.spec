@@ -11,7 +11,7 @@ Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
-# BuildRequires: rubygem(rspec)
+BuildRequires: rubygem(rspec)
 BuildArch: noarch
 
 %description
@@ -45,17 +45,14 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -a .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-
-
 %check
 pushd .%{gem_instdir}
-# rspec spec
+rspec spec
 popd
 
 %files
 %dir %{gem_instdir}
-%exclude %{gem_instdir}/.gitignore
-%exclude %{gem_instdir}/.travis.yml
+%exclude %{gem_instdir}/.*
 %license %{gem_instdir}/LICENSE
 %{gem_libdir}
 %exclude %{gem_cache}
