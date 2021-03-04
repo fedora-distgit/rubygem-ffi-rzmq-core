@@ -1,0 +1,13 @@
+diff --git a/lib/ffi-rzmq-core/libzmq.rb b/lib/ffi-rzmq-core/libzmq.rb
+index 8f77c1b..9e44bda 100644
+--- a/lib/ffi-rzmq-core/libzmq.rb
++++ b/lib/ffi-rzmq-core/libzmq.rb
+@@ -36,7 +36,7 @@ module LibZMQ
+     # Search for libzmq in the following order...
+     ZMQ_LIB_PATHS = ([inside_gem] + env_path + local_path + [rbconfig_path] + [
+                        '/usr/local/lib', '/opt/local/lib', homebrew_path, '/usr/lib64'
+-    ]).compact.map{|path| "#{path}/libzmq.#{FFI::Platform::LIBSUFFIX}"}
++    ]).compact.map{|path| "#{path}/libzmq.#{FFI::Platform::LIBSUFFIX}.5"}
+ 
+     # Recent versions of libzmq do not put all symbols into the global namespace so
+     # lazy linking can fail at runtime. Force all symbols to global namespace.

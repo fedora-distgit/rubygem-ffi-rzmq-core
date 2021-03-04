@@ -8,16 +8,18 @@ Summary: This gem provides only the FFI wrapper for the ZeroMQ (0mq) networking 
 License: MIT
 URL: http://github.com/chuckremes/ffi-rzmq-core
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
-
-Requires: (libzmq.so.5()(64bit) if libffi.so.6()(64bit))
-Requires: (libzmq.so.5 if libffi.so.6)
+# The zeromq provides unversioned soname only in its devel subpackage,
+# which pulls in too many unnecessary dependencies
+Patch0: %{name}-%{version}-specify_libzmq_soname_version.patch
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
 BuildRequires: rubygem(rspec)
 BuildRequires: rubygem(ffi)
-BuildRequires: (libzmq.so.5()(64bit) if libffi.so.6()(64bit))
-BuildRequires: (libzmq.so.5 if libffi.so.6)
+BuildRequires: zeromq
+# RPM does not generate zeromq require automatically.
+Requires: zeromq
+
 BuildArch: noarch
 
 %description
@@ -37,6 +39,8 @@ Documentation for %{name}.
 
 %prep
 %setup -q -n %{gem_name}-%{version}
+
+%patch0 -p1
 
 %build
 # Create the gem as gem install only works on a gem file
