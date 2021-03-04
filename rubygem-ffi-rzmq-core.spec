@@ -8,10 +8,16 @@ Summary: This gem provides only the FFI wrapper for the ZeroMQ (0mq) networking 
 License: MIT
 URL: http://github.com/chuckremes/ffi-rzmq-core
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
+
+Requires: (libzmq.so.5()(64bit) if libffi.so.6()(64bit))
+Requires: (libzmq.so.5 if libffi.so.6)
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
 BuildRequires: ruby
 BuildRequires: rubygem(rspec)
+BuildRequires: rubygem(ffi)
+BuildRequires: (libzmq.so.5()(64bit) if libffi.so.6()(64bit))
+BuildRequires: (libzmq.so.5 if libffi.so.6)
 BuildArch: noarch
 
 %description
@@ -45,9 +51,11 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -a .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
+find -iname *.so
+
 %check
 pushd .%{gem_instdir}
-rspec spec
+rspec -Ilib:$(dirs +1)/%{gem_extdir_mri} spec
 popd
 
 %files
