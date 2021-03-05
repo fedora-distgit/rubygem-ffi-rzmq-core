@@ -55,8 +55,6 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -a .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-find -iname *.so
-
 %check
 pushd .%{gem_instdir}
 rspec -Ilib:$(dirs +1)/%{gem_extdir_mri} spec
@@ -64,11 +62,11 @@ popd
 
 %files
 %dir %{gem_instdir}
-%exclude %{gem_instdir}/.*
 %license %{gem_instdir}/LICENSE
 %{gem_libdir}
-%exclude %{gem_cache}
 %{gem_spec}
+%exclude %{gem_instdir}/.*
+%exclude %{gem_cache}
 
 %files doc
 %doc %{gem_docdir}
