@@ -16,9 +16,11 @@ BuildRequires: rubygems-devel
 BuildRequires: ruby
 BuildRequires: rubygem(rspec)
 BuildRequires: rubygem(ffi)
-BuildRequires: zeromq
+BuildRequires: (libzmq.so.5()(64bit) if libffi.so.6()(64bit))
+BuildRequires: (libzmq.so.5 if libffi.so.6)
 # RPM does not generate zeromq require automatically.
-Requires: zeromq
+Requires: (libzmq.so.5()(64bit) if libffi.so.6()(64bit))
+Requires: (libzmq.so.5 if libffi.so.6)
 
 BuildArch: noarch
 
