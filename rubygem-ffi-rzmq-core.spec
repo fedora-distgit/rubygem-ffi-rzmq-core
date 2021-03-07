@@ -9,7 +9,9 @@ License: MIT
 URL: http://github.com/chuckremes/ffi-rzmq-core
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 # The zeromq provides unversioned soname only in its devel subpackage,
-# which pulls in too many unnecessary dependencies
+# which pulls in too many unnecessary dependencies.
+# PR opened upstream to have the wrapper also search for versioned libraries.
+# https://github.com/chuckremes/ffi-rzmq-core/pull/18
 Patch0: %{name}-%{version}-specify_libzmq_soname_version.patch
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel
